@@ -3,9 +3,11 @@
     type="text"
     id="SearchBar"
     placeholder="Buscar..."
-    class="w-full h-12 pl-12 pr-4 bg-white border border-slate-300 rounded-xl shadow-sm placeholder-zinc-400 text-zinc-800 focus:outline-2 focus:outline-slate-400 focus:shadow-lg focus:border-transparent"
+    class="w-full h-12 pl-12 pr-4 bg-white border border-slate-300 rounded-xl shadow-sm placeholder-zinc-400 text-zinc-800 focus:outline-2 focus:outline-slate-500 focus:shadow-lg focus:border-transparent"
     [formControl]="query"
     (keyup)="onSearch()"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
   />
   <span
     class="absolute inset-y-0 left-0 grid place-content-center w-12 text-zinc-500"
@@ -25,28 +27,37 @@
       />
     </svg>
   </span>
-  @if (books.length > 0) {
-  <ul
-    class="absolute w-full mt-2 bg-white border border-slate-300 rounded-xl shadow-lg overflow-hidden"
+  @if (isDropdownOpen) {
+  <div
+    class="absolute flex w-full mt-2 bg-white border border-slate-300 rounded-xl shadow-lg overflow-hidden"
+    [ngStyle]="{ 'max-height.px': maxDropdownHeight }"
   >
-    @for (book of books; track $index) {
-    <li
-      class="flex items-start gap-3 p-3 cursor-pointer hover:bg-gray-200"
-      (click)="selectBook(book)"
-    >
-      <img
-        [src]="book.volumeInfo.imageLinks.thumbnail"
-        alt="Portada"
-        class="w-12 h-16 rounded-md"
-      />
-      <div>
-        <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
-        <p class="text-sm text-zinc-600">
-          {{ book.volumeInfo.authors?.join(", ") }}
-        </p>
-      </div>
-    </li>
+    @if (bookList.length > 0) {
+    <ul class="w-full overflow-y-auto">
+      @for (book of bookList; track $index) {
+      <li
+        class="flex items-start gap-3 p-3 cursor-pointer hover:bg-gray-200"
+        (click)="selectBook(book)"
+      >
+        <img
+          [src]="book.volumeInfo.imageLinks.thumbnail"
+          alt="Portada"
+          class="w-12 min-w-12 h-16 min-h-16 rounded-md"
+        />
+        <div>
+          <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
+          <p class="text-sm text-zinc-600">
+            {{ book.volumeInfo.authors?.join(", ") }}
+          </p>
+        </div>
+      </li>
+      }
+    </ul>
+    } @else {
+    <div class="w-full py-8 px-3 grid place-content-center">
+      <p class="text-zinc-400">Sin coincidencias</p>
+    </div>
     }
-  </ul>
+  </div>
   }
 </div>
