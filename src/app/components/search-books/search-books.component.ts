@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { GoogleBooksService } from '../../services/google-books.service';
-import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-books',
-  imports: [FormsModule, NgIf, NgFor],
+  imports: [ReactiveFormsModule],
   templateUrl: './search-books.component.html',
   styleUrl: './search-books.component.css',
 })
 export class SearchBooksComponent {
-  query: string = '';
+  query = new FormControl('');
   books: any[] = [];
 
   constructor(private booksService: GoogleBooksService) {}
 
   onSearch() {
-    if (this.query.length > 2) {
-      this.booksService.searchBooks(this.query).subscribe((response) => {
+    const queryValue = this.query.value;
+    if (queryValue && queryValue.length > 2) {
+      this.booksService.searchBooks(queryValue).subscribe((response) => {
         this.books = response.items || [];
       });
     }
@@ -28,6 +28,6 @@ export class SearchBooksComponent {
   }
 
   imWriting() {
-    console.log('dot' + this.query);
+    console.log(this.query);
   }
 }

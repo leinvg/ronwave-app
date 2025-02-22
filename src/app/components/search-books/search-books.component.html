@@ -3,12 +3,12 @@
     type="text"
     id="SearchBar"
     placeholder="Buscar..."
-    class="w-full pl-11 p-2.5 border border-slate-300 rounded-md shadow-xs placeholder-gray-400 text-gray-800 focus:outline-2 focus:outline-slate-400 focus:shadow-md focus:border-transparent"
-    [(ngModel)]="query"
+    class="w-full h-12 pl-12 pr-4 bg-white border border-slate-300 rounded-xl shadow-sm placeholder-zinc-400 text-zinc-800 focus:outline-2 focus:outline-slate-400 focus:shadow-lg focus:border-transparent"
+    [formControl]="query"
     (keyup)="onSearch()"
   />
   <span
-    class="absolute inset-y-0 left-0 grid place-content-center w-11 text-gray-500"
+    class="absolute inset-y-0 left-0 grid place-content-center w-12 text-zinc-500"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,27 +26,27 @@
     </svg>
   </span>
   @if (books.length > 0) {
-    <ul
-      class="absolute w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+  <ul
+    class="absolute w-full mt-2 bg-white border border-slate-300 rounded-xl shadow-lg overflow-hidden"
+  >
+    @for (book of books; track $index) {
+    <li
+      class="flex items-start gap-3 p-3 cursor-pointer hover:bg-gray-200"
+      (click)="selectBook(book)"
     >
-      @for (book of books; track $index) {
-        <li
-          class="p-2 cursor-pointer hover:bg-gray-100 flex items-center gap-3"
-          (click)="selectBook(book)"
-        >
-          <img
-            [src]="book.volumeInfo.imageLinks.thumbnail"
-            alt="Portada"
-            class="w-12 h-16 rounded-md"
-          />
-          <div>
-            <p class="font-semibold text-gray-800">{{ book.volumeInfo.title }}</p>
-            <p class="text-sm text-gray-600">
-              {{ book.volumeInfo.authors?.join(", ") }}
-            </p>
-          </div>
-        </li>
-      }
-    </ul>
+      <img
+        [src]="book.volumeInfo.imageLinks.thumbnail"
+        alt="Portada"
+        class="w-12 h-16 rounded-md"
+      />
+      <div>
+        <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
+        <p class="text-sm text-zinc-600">
+          {{ book.volumeInfo.authors?.join(", ") }}
+        </p>
+      </div>
+    </li>
+    }
+  </ul>
   }
 </div>
