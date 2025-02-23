@@ -18,21 +18,19 @@
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="size-4"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      class="size-5"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+        fill-rule="evenodd"
+        d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+        clip-rule="evenodd"
       />
     </svg>
   </span>
   <span
-    class="absolute inset-y-0 right-0 grid place-content-center w-12 cursor-grab text-zinc-400 hover:text-zinc-500"
+    class="absolute top-2 right-2 grid place-content-center w-8 h-8 rounded-md cursor-grab text-zinc-400 hover:text-zinc-600 hover:bg-gray-200 active:bg-gray-300 active:text-zinc-600"
     cdkDragHandle
   >
     <svg
@@ -42,7 +40,9 @@
       class="size-5"
     >
       <path
-        d="m13.28 7.78 3.22-3.22v2.69a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0 0 1.5h2.69l-3.22 3.22a.75.75 0 0 0 1.06 1.06ZM2 17.25v-4.5a.75.75 0 0 1 1.5 0v2.69l3.22-3.22a.75.75 0 0 1 1.06 1.06L4.56 16.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.747.747 0 0 1-.75-.75ZM12.22 13.28l3.22 3.22h-2.69a.75.75 0 0 0 0 1.5h4.5a.747.747 0 0 0 .75-.75v-4.5a.75.75 0 0 0-1.5 0v2.69l-3.22-3.22a.75.75 0 1 0-1.06 1.06ZM3.5 4.56l3.22 3.22a.75.75 0 0 0 1.06-1.06L4.56 3.5h2.69a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0-.75.75v4.5a.75.75 0 0 0 1.5 0V4.56Z"
+        fill-rule="evenodd"
+        d="M2 6.75A.75.75 0 0 1 2.75 6h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.75Zm0 6.5a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+        clip-rule="evenodd"
       />
     </svg>
   </span>
@@ -69,6 +69,9 @@
           <p class="text-sm text-zinc-600">
             {{ book.volumeInfo.authors?.join(", ") }}
           </p>
+          <p class="text-sm text-zinc-400">
+            {{ book.volumeInfo.publishedDate | date : "yyyy" }}
+          </p>
         </div>
       </li>
       }
@@ -79,5 +82,11 @@
     </div>
     }
   </div>
+  }
+</div>
+
+<div class="mt-4">
+  @for (book of selectedBooks; track $index) {
+  <app-book-card [book]="book" />
   }
 </div>

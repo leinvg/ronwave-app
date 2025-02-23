@@ -1,18 +1,26 @@
 import { Component, HostListener } from '@angular/core';
 import { GoogleBooksService } from '../../services/google-books.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { NgStyle } from '@angular/common';
+import { DatePipe, NgStyle } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BookCardComponent } from '../book-card/book-card.component';
 
 @Component({
   selector: 'app-search-books',
-  imports: [ReactiveFormsModule, NgStyle, DragDropModule],
+  imports: [
+    ReactiveFormsModule,
+    DatePipe,
+    NgStyle,
+    DragDropModule,
+    BookCardComponent,
+  ],
   templateUrl: './search-books.component.html',
   styleUrl: './search-books.component.css',
 })
 export class SearchBooksComponent {
   query = new FormControl('');
   bookList: any[] = [];
+  selectedBooks: any[] = [];
   maxDropdownHeight: number = 88;
   isDropdownOpen = false;
 
@@ -63,7 +71,8 @@ export class SearchBooksComponent {
   }
 
   selectBook(book: any) {
-    console.log('Libro seleccionado:', book);
+    console.log('Libro:', book);
+    this.selectedBooks.push(book);
     this.isDropdownOpen = false;
   }
 }
