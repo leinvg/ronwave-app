@@ -1,18 +1,18 @@
-<div class="w-xs p-3 bg-white border border-slate-300 rounded-xl shadow-sm">
-  <div class="flex items-start gap-3">
-    <img
-      [src]="book.volumeInfo.imageLinks.thumbnail"
-      alt="Portada"
-      class="w-12 min-w-12 h-16 min-h-16 rounded-md border border-slate-200"
-    />
-    <div>
-      <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
-      <p class="text-sm text-zinc-600">
-        {{ book.volumeInfo.authors?.join(", ") }}
-      </p>
-      <p class="text-sm text-zinc-600">
-        {{ book.volumeInfo.publishedDate | date : "yyyy" }}
-      </p>
-    </div>
+<div
+  class="flex items-start gap-3 w-xs p-3 bg-white border border-slate-300 rounded-xl shadow-sm hover:shadow-lg"
+>
+  <img
+    [src]="book.volumeInfo.imageLinks.thumbnail"
+    alt="Portada"
+    class="w-12 min-w-12 h-16 min-h-16 rounded-md border border-slate-200"
+  />
+  <div>
+    <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
+    <p class="text-sm text-zinc-600">
+      {{ book.volumeInfo.authors?.join(", ") }}
+    </p>
+    <p class="text-sm text-zinc-600">
+      {{ book.volumeInfo.publishedDate | date : "yyyy" }}
+    </p>
   </div>
 </div>

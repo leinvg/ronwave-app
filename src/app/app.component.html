@@ -4,7 +4,7 @@
     class="absolute top-0 left-0 w-dvw h-dvh overflow-hidden"
   >
     <app-search-books (booksListUpdated)="updateBookList($event)" />
-    <div class="grid gap-3 w-full h-dvh p-3 bg-green-100 overflow-y-auto">
+    <div class="grid gap-3 w-full h-fit p-3">
       @for (book of bookList; track $index) {
       <app-book-card [book]="book" />
       }
