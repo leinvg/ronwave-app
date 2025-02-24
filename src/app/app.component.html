@@ -1,6 +1,14 @@
-<div class="flex w-dvw h-dvh p-3">
-  <div id="Container" class="w-full h-full">
-    <app-search-books />
+<div class="flex w-dvw h-dvh">
+  <div
+    id="DragLimit"
+    class="absolute top-0 left-0 w-dvw h-dvh overflow-hidden"
+  >
+    <app-search-books (booksListUpdated)="updateBookList($event)" />
+    <div class="grid gap-3 w-full h-dvh p-3 bg-green-100 overflow-y-auto">
+      @for (book of bookList; track $index) {
+      <app-book-card [book]="book" />
+      }
+    </div>
   </div>
 </div>
 <router-outlet />

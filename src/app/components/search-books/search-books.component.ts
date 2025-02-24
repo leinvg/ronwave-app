@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { GoogleBooksService } from '../../services/google-books.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, NgStyle } from '@angular/common';
@@ -18,9 +18,11 @@ import { BookCardComponent } from '../book-card/book-card.component';
   styleUrl: './search-books.component.css',
 })
 export class SearchBooksComponent {
+  @Output() booksListUpdated = new EventEmitter<any>();
+  selectedBooks: any[] = [];
+
   query = new FormControl('');
   bookList: any[] = [];
-  selectedBooks: any[] = [];
   maxDropdownHeight: number = 88;
   isDropdownOpen = false;
 
@@ -62,7 +64,8 @@ export class SearchBooksComponent {
         this.bookList = (response.items || []).filter(
           (item: any) =>
             item.volumeInfo.imageLinks?.thumbnail &&
-            item.volumeInfo.authors?.length > 0
+            item.volumeInfo.authors?.length > 0 &&
+            item.volumeInfo.publishedDate
         );
       });
     } else {
@@ -73,6 +76,7 @@ export class SearchBooksComponent {
   selectBook(book: any) {
     console.log('Libro:', book);
     this.selectedBooks.push(book);
+    this.booksListUpdated.emit(this.selectedBooks);
     this.isDropdownOpen = false;
   }
 }

@@ -1,7 +1,7 @@
 <div
   class="absolute top-1/2 left-1/2 -translate-1/2 w-sm"
   (cdkDragStarted)="closeDropdown()"
-  cdkDragBoundary="#Container"
+  cdkDragBoundary="#DragLimit"
   cdkDrag
 >
   <input
@@ -62,14 +62,16 @@
         <img
           [src]="book.volumeInfo.imageLinks.thumbnail"
           alt="Portada"
-          class="w-12 min-w-12 h-16 min-h-16 rounded-md"
+          class="w-12 min-w-12 h-16 min-h-16 rounded-md border border-slate-200"
         />
         <div>
-          <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
+          <p class="font-semibold text-zinc-800">
+            {{ book.volumeInfo.title }}
+          </p>
           <p class="text-sm text-zinc-600">
             {{ book.volumeInfo.authors?.join(", ") }}
           </p>
-          <p class="text-sm text-zinc-400">
+          <p class="text-sm text-zinc-600">
             {{ book.volumeInfo.publishedDate | date : "yyyy" }}
           </p>
         </div>
@@ -82,11 +84,5 @@
     </div>
     }
   </div>
-  }
-</div>
-
-<div class="mt-4">
-  @for (book of selectedBooks; track $index) {
-  <app-book-card [book]="book" />
   }
 </div>
