@@ -1,51 +1,56 @@
-<div
-  class="absolute top-1/2 left-1/2 -translate-1/2 w-sm"
-  (cdkDragStarted)="closeDropdown()"
-  cdkDragBoundary="#DragLimit"
-  cdkDrag
->
+<div class="absolute top-1/2 left-1/2 -translate-1/2 w-sm">
+  <div
+    class="absolute bottom-full w-full pb-8 flex flex-col gap-1 items-center"
+  >
+    <h1 class="text-2xl font-bold text-center text-zinc-800">
+      Descubre lo escencial
+    </h1>
+    <h1 class="text-md font-normal text-center text-zinc-600">
+      Escoge cualquier libro
+    </h1>
+  </div>
   <input
     type="text"
     id="SearchBar"
     placeholder="Buscar..."
-    class="w-full h-12 pl-12 pr-12 bg-white border border-slate-300 rounded-xl shadow-sm placeholder-zinc-400 text-zinc-800 focus:outline-2 focus:outline-slate-500 focus:shadow-lg focus:border-transparent"
+    class="w-full h-12 pl-4 pr-12 bg-white border border-slate-300 rounded-xl shadow-sm placeholder-zinc-400 text-zinc-800 focus:outline-2 focus:outline-slate-500 focus:shadow-lg focus:border-transparent"
     [formControl]="query"
     (input)="onSearch()"
     (focus)="openDropdown()"
   />
   <span
-    class="absolute inset-y-0 left-0 grid place-content-center w-12 text-zinc-400"
+    class="absolute inset-y-0 right-0 grid place-content-center w-12 text-zinc-400"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
+      viewBox="0 0 16 16"
       fill="currentColor"
-      class="size-5"
+      class="size-4"
     >
       <path
         fill-rule="evenodd"
-        d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
         clip-rule="evenodd"
       />
     </svg>
   </span>
-  <span
+  <!-- <span
     class="absolute top-2 right-2 grid place-content-center w-8 h-8 rounded-md cursor-grab text-zinc-400 hover:text-zinc-600 hover:bg-gray-200 active:bg-gray-300 active:text-zinc-600"
     cdkDragHandle
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
+      viewBox="0 0 16 16"
       fill="currentColor"
-      class="size-5"
+      class="size-4"
     >
       <path
         fill-rule="evenodd"
-        d="M2 6.75A.75.75 0 0 1 2.75 6h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.75Zm0 6.5a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+        d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm0 6.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
         clip-rule="evenodd"
       />
     </svg>
-  </span>
+  </span> -->
   @if (isDropdownOpen) {
   <div
     id="Dropdown"

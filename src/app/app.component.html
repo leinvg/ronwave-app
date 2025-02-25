@@ -1,8 +1,5 @@
 <div class="flex w-dvw h-dvh">
-  <div
-    id="DragLimit"
-    class="absolute top-0 left-0 w-dvw h-dvh overflow-hidden"
-  >
+  <div class="absolute top-0 left-0 w-dvw h-dvh overflow-hidden">
     <app-search-books (booksListUpdated)="updateBookList($event)" />
     <div class="grid gap-3 w-full h-fit p-3">
       @for (book of bookList; track $index) {

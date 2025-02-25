@@ -3,17 +3,10 @@ import { GoogleBooksService } from '../../services/google-books.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, NgStyle } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { BookCardComponent } from '../book-card/book-card.component';
 
 @Component({
   selector: 'app-search-books',
-  imports: [
-    ReactiveFormsModule,
-    DatePipe,
-    NgStyle,
-    DragDropModule,
-    BookCardComponent,
-  ],
+  imports: [ReactiveFormsModule, DatePipe, NgStyle, DragDropModule],
   templateUrl: './search-books.component.html',
   styleUrl: './search-books.component.css',
 })
@@ -49,8 +42,10 @@ export class SearchBooksComponent {
   }
 
   openDropdown() {
-    this.calculateDropdownHeight();
-    this.isDropdownOpen = true;
+    if (this.query.value && !this.isDropdownOpen) {
+      this.calculateDropdownHeight();
+      this.isDropdownOpen = true;
+    }
   }
 
   closeDropdown() {
@@ -59,15 +54,21 @@ export class SearchBooksComponent {
 
   onSearch() {
     const queryValue = this.query.value;
-    if (queryValue && queryValue.length > 2) {
-      this.booksService.searchBooks(queryValue).subscribe((response) => {
-        this.bookList = (response.items || []).filter(
-          (item: any) =>
-            item.volumeInfo.imageLinks?.thumbnail &&
-            item.volumeInfo.authors?.length > 0 &&
-            item.volumeInfo.publishedDate
-        );
-      });
+    if (queryValue) {
+      if (!this.isDropdownOpen) {
+        this.calculateDropdownHeight();
+        this.isDropdownOpen = true;
+      }
+      if (queryValue.length > 2) {
+        this.booksService.searchBooks(queryValue).subscribe((response) => {
+          this.bookList = (response.items || []).filter(
+            (item: any) =>
+              item.volumeInfo.imageLinks?.thumbnail &&
+              item.volumeInfo.authors?.length > 0 &&
+              item.volumeInfo.publishedDate
+          );
+        });
+      }
     } else {
       this.bookList = [];
     }
