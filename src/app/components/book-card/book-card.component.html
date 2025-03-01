@@ -1,18 +1,35 @@
 <div
-  class="flex items-start gap-3 w-xs p-3 bg-white border border-slate-300 rounded-xl shadow-sm hover:shadow-lg"
+  class="flex flex-col gap-3 w-lg p-3 bg-white border border-slate-300 rounded-xl shadow-sm hover:shadow-lg"
 >
-  <img
-    [src]="book.volumeInfo.imageLinks.thumbnail"
-    alt="Portada"
-    class="w-12 min-w-12 h-16 min-h-16 rounded-md border border-slate-200"
-  />
+  <div class="flex justify-between">
+    <div>
+      <img
+        [src]="book.volumeInfo.imageLinks.thumbnail"
+        alt="Portada"
+        class="w-12 min-w-12 h-16 min-h-16 rounded-md border border-slate-200"
+      />
+      <div>
+        <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
+        <p class="text-sm text-zinc-600">
+          {{ book.volumeInfo.authors?.join(", ") }} &bull;
+          {{ book.volumeInfo.publishedDate | date : "yyyy" }}
+        </p>
+      </div>
+    </div>
+    <span (click)="closeCardBook()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="size-4"
+      >
+        <path
+          d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z"
+        />
+      </svg>
+    </span>
+  </div>
   <div>
-    <p class="font-semibold text-zinc-800">{{ book.volumeInfo.title }}</p>
-    <p class="text-sm text-zinc-600">
-      {{ book.volumeInfo.authors?.join(", ") }}
-    </p>
-    <p class="text-sm text-zinc-600">
-      {{ book.volumeInfo.publishedDate | date : "yyyy" }}
-    </p>
+    <p class="summary">{{ summary }}</p>
   </div>
 </div>

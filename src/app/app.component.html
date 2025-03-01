@@ -1,11 +1,12 @@
 <div class="flex w-dvw h-dvh">
-  <div class="absolute top-0 left-0 w-dvw h-dvh overflow-hidden">
-    <app-search-books (booksListUpdated)="updateBookList($event)" />
-    <div class="grid gap-3 w-full h-fit p-3">
-      @for (book of bookList; track $index) {
-      <app-book-card [book]="book" />
-      }
-    </div>
+  <app-search-books (selectedBookUpdated)="updateBook($event)" />
+  <div
+    class="flex items-center justify-center w-full p-3"
+    [ngStyle]="{ 'z-index': zIndex }"
+  >
+    @if (book) {
+    <app-book-card [book]="book" (removeSelectedBook)="removeBook($event)" />
+    }
   </div>
 </div>
 <router-outlet />

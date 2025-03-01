@@ -11,8 +11,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   styleUrl: './search-books.component.css',
 })
 export class SearchBooksComponent {
-  @Output() booksListUpdated = new EventEmitter<any>();
-  selectedBooks: any[] = [];
+  @Output() selectedBookUpdated = new EventEmitter<any>();
+  selectedBook: any = null;
 
   query = new FormControl('');
   bookList: any[] = [];
@@ -76,8 +76,8 @@ export class SearchBooksComponent {
 
   selectBook(book: any) {
     console.log('Libro:', book);
-    this.selectedBooks.push(book);
-    this.booksListUpdated.emit(this.selectedBooks);
+    this.selectedBook = book;
+    this.selectedBookUpdated.emit(this.selectedBook);
     this.isDropdownOpen = false;
   }
 }
